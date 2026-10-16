@@ -1,9 +1,22 @@
+import os
+
+from dotenv import load_dotenv
 from flask import Flask, jsonify
 from flask_cors import CORS
 from data import products
 
+load_dotenv()
+
 app = Flask(__name__)
 CORS(app)
+
+HOST = os.getenv("FLASK_HOST", "127.0.0.1")
+PORT = int(os.getenv("FLASK_PORT", "5000"))
+DEBUG = os.getenv("FLASK_DEBUG", "false").lower() == "true"
+
+@app.route("/")
+def home():
+    return "Flask API is running!"
 
 @app.route("/api/products", methods=["GET"])
 def get_products():
@@ -18,7 +31,10 @@ def get_product(product_id):
 
 @app.route("/api/health", methods=["GET"])
 def health():
-    return jsonify({"status": "OK"})
+    return jsonify({
+        "status": "OK",
+        "environment": os.getenv("FLASK_ENV", "development")
+    })
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host=HOST, port=PORT, debug=DEBUG)

@@ -1,126 +1,129 @@
-# Flask
+# React + Python + Flask full-stack Product Application template
 
-Flask is a micro web framework written in Python. 
-Flask has three main dependencies. The routing, debugging, and Web Server
-Gateway Interface (WSGI) subsystems come from Werkzeug; the template
-support is provided by Jinja2; and the command-line integration comes from
-Click.
+A full-stack web application built with **ReactJS** on the frontend and **Flask** on the backend.
 
+The application includes Home, Products, Product Details, and About pages.
+The React frontend communicates with a Flask REST API to retrieve product data.
 
-### Install
+The current application supports navigation between Home, Products, Product Details, and About pages, 
+retrieves product information through Flask REST endpoints, handles missing products with HTTP 404 responses, 
+and includes automated backend tests with Pytest.
 
-Create a project folder:
+✔️ Architecture is:
+
+- Frontend: ReactJS | React Router | Vite | JavaScript | HTML5 | CSS3 | Fetch API | npm | Node.js
+- Backend: Python | Flask | Flask-CORS | RESTful API | pip
+- Testing: Pytest | Flask Test Client
+- API: RESTful endpoints
+- Pages: Home, Products, About
+- Data: Products returned from Flask API
+- Development: React on localhost:3000, Flask on localhost:5000
+
+✔️ Project structure:
+
 ```
-mkdir myproject
-cd myproject
-```
-
-Create an environment:
-```
-python3 -m venv venv (On Windows) or
-sudo apt-get install python3-venv (Linux)
-```
-
-Activate the environment: 
-```
-venv\Scripts\activate (On Windows) or 
-venv/bin/activate (Linux) 
-```
-
-Install Flask: 
-```
-pip install Flask
-```
-Running on [http://127.0.0.1:5000](http://127.0.0.1:5000/) (Press CTRL+C to quit) 
-
-For MySQL:
-```
-sudo apt get install mysl-server libmysqlclient-dev or
-pip install flask-mysqldb
-```
-
-For SQLAlchemy:
-```
-pip install flask-sqlalchemy
-
-in Python Console: 
-from app import db
-db.create_all()
-from app import User, Post
-user_1 = User(username='test', email='test@test.com', password='password')
-db.session.add(user_1)
-db.session.commit()
-User.query.all()
-User.query.first()
-User.query.filter_by(username='test').all()
-User.query.filter_by(username='test').first()
-
-user = User.query.filter_by(username='test').all()
-user.id // 1
-user = User.query.get(1)
-user.posts // []
-
-post_1 = Post(title='Article One', text='Lorem ipsum dolor sit amet...', user_id=user.id)
-db.session.add(post_1)
-db.session.commit()
-
-// drop db table rows
-db.drop_all()
-db.create_all()
-User.query.all() // []
-Post.query.all() // []
-
-# Не работает!!!
-user.posts
-
-for post in user.posts:
-   print(post.title)
-
-post = Post.query.first()
-
-post.user_id
-post.author
+flask-react-app/
+├── backend/
+|   ├── venv/
+│   ├── .env
+│   ├── .env.test
+|   ├── __init__.py
+│   ├── app.py
+│   ├── data.py
+│   ├── requirements.txt
+|   └── tests/
+|       ├── __init__.py
+|       └── test_app.py
+└── frontend/
+    ├── package-lock.json
+    ├── package.json
+    ├── .gitignore
+    ├── .env.development
+    ├── .env.production
+    ├── .env.test
+    └── src/
+        ├── App.jsx
+        ├── main.jsx
+        ├── api.js
+        ├── components/
+        │   └── Navbar.jsx
+        └── pages/
+            ├── Home.jsx
+            ├── ProductDetails.jsx
+            ├── Products.jsx
+            └── About.jsx
 ```
 
-Install for Forms:
-```
-pip install Flask-WTF
-```
+✔️ Set up a project with a Flask backend and a React frontend:
 
-Install Flask Bootstrap:
-```
-pip install flask-bootstrap
-```
-Install all the requirements:
-```
+```bash
+python --version
+cd flask-react-app/backend
+pip install Flask Flask-CORS
+pip install python-dotenv // for Flask environment variables
+python -m pip install python-dotenv
+pip freeze > requirements.txt // update requirements file
+clear // clear terminal
+
+✔️ Install pip (Python Package Index)
+pip --version // pip: the package installer for Python
+pip show pip  // show path where pip
+
+✔️ Update Python packages:
+python -m pip install --upgrade pip
+pip install --upgrade <package_name>
+pip install --upgrade <package_name>==<version_number>
+pip list --outdated // to check for outdated packages
+pip install -r requirements.txt --upgrade
+
+✔️ Python/Flask Testing:
+$ pip install pytest
+
+✔️ Install the packages according to requirements:
 $ pip install -r requirements.txt
+
+✔️  Start React:
+cd frontend
+npm run dev
+
+✔️  Run Python Tests with pytest from the `backend` directory:
+cd backend
+python -m pytest -v
+
+✔️  Create Virtual Environment
+python -m venv venv
+
+✔️  Activate Virtual Environment for Windows:
+venv\Scripts\activate
+
+✔️  Run Flask from the `backend` directory:
+cd backend
+venv\Scripts\activate
+python app.py
 ```
 
-Flask allows you to register environment variables that you want to be automatically 
-imported when you run the flask command. To use this option you have to install the python-dotenv package:
-```
-(venv) $ pip install python-dotenv
+✔️ Implemented:
+
+- Created React + Python/Flask full-stack project.
+- Routing in a Flask project.
+
+✔️ Pytest Unit Tests
+
+The project includes tests for the Flask API.
+Tests are located in:
+
+```text
+backend/tests/test_app.py
 ```
 
-Flask-CLI:
-```
-pip install flask-cli
-```
+The tests use Flask's built-in test client.
+Expected output:
 
-Bcrypt (for generating strong hashing values in Python)
+```text
+tests/test_app.py::test_home PASSED
+tests/test_app.py::test_health PASSED
+tests/test_app.py::test_get_products PASSED
+tests/test_app.py::test_get_product PASSED
+tests/test_app.py::test_get_product_2 PASSED
+tests/test_app.py::test_product_not_found PASSED
 ```
-pip install flask-bcrypt
-
-in Python Console: 
-from flask_bcrypt import Bcrypt
-bcrypt = Bcrypt()
-bcrypt.generate_password_hash('')
-```
-
-
-### Useful Links
-* [https://flask.palletsprojects.com/en/1.1.x](https://flask.palletsprojects.com/en/1.1.x/) - Flask documentation
-* [https://github.com/pallets/flask](https://github.com/pallets/flask) - Open source
-* [https://www.tutorialspoint.com/flask](https://www.tutorialspoint.com/flask/index.htm) - Flask tutorial
-* [https://pythonhosted.org/Flask-Bootstrap](https://pythonhosted.org/Flask-Bootstrap/) - Flask Bootstrap
-* https://github.com/pallets/flask/tree/1.1.2/examples/tutorial
