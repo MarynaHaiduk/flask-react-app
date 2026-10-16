@@ -5,8 +5,8 @@ A full-stack web application built with **ReactJS** on the frontend and **Flask*
 The application includes Home, Products, Product Details, and About pages.
 The React frontend communicates with a Flask REST API to retrieve product data.
 
-The current application supports navigation between Home, Products, Product Details, and About pages, 
-retrieves product information through Flask REST endpoints, handles missing products with HTTP 404 responses, 
+The current application supports navigation between Home, Products, Product Details, and About pages,
+retrieves product information through Flask REST endpoints, handles missing products with HTTP 404 responses,
 and includes automated backend tests with Pytest.
 
 ✔️ Architecture is:
@@ -106,6 +106,9 @@ python app.py
 
 - Created React + Python/Flask full-stack project.
 - Routing in a Flask project.
+- Separated environment-specific configuration from application code using environment variables and Vite modes
+  on the frontend and python-dotenv on the Flask backend. This allows the same codebase to run against development,
+  test, staging, and production APIs without hard-coded URLs or credentials.
 
 ✔️ Pytest Unit Tests
 
@@ -120,10 +123,10 @@ The tests use Flask's built-in test client.
 Expected output:
 
 ```text
-tests/test_app.py::test_home PASSED
-tests/test_app.py::test_health PASSED
-tests/test_app.py::test_get_products PASSED
-tests/test_app.py::test_get_product PASSED
-tests/test_app.py::test_get_product_2 PASSED
-tests/test_app.py::test_product_not_found PASSED
+tests/test_app.py::test_home PASSED                                                                                     [ 16%]
+tests/test_app.py::test_health PASSED                                                                                   [ 33%]
+tests/test_app.py::test_get_products PASSED                                                                             [ 50%]
+tests/test_app.py::test_get_product PASSED                                                                              [ 66%]
+tests/test_app.py::test_get_product_2 PASSED                                                                            [ 83%]
+tests/test_app.py::test_product_not_found PASSED                                                                        [100%]
 ```

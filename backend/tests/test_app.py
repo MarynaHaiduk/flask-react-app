@@ -1,3 +1,4 @@
+import os
 import pytest
 from app import app
 
@@ -19,7 +20,8 @@ def test_health(client):
     response = client.get("/api/health")
     assert response.status_code == 200
     assert response.json == {
-        "status": "OK"
+        "status": "OK",
+        "environment": os.getenv("FLASK_ENV", "development")
     }
 
 
